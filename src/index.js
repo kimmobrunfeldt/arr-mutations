@@ -1,55 +1,65 @@
-var xor = require('arr-xor');
-var and = require('arr-and');
-
 var _ = {
     merge: require('lodash.merge'),
     each: require('lodash.foreach'),
     findIndex: require('lodash.findIndex'),
-    find: require('lodash.find'),
     isEqual: require('lodash.isEqual'),
-    sortBy: require('lodash.sortby')
+    sortBy: require('lodash.sortby'),
+    isUndefined: require('lodash.isundefined')
 };
 
 // Returns difference of two arrays, a and b
-function changes(a, b, opts) {
+function mutations(a, b, opts) {
     opts = _.merge({
         equals: defaultEquals,
         deepEquals: defaultDeepEquals
     }, opts);
 
-    var changesList = [];
+    var mutationsList = [];
+    var aCopy = a.slice();
+    var bCopy = b.slice();
 
-    var notInBoth = xor(a, b, opts.equals);
-    _.each(notInBoth, function(item) {
-        var isInA = _.findIndex(a, function(aItem) {
-            return opts.equals(aItem, item);
-        }) !== -1;
+    while (aCopy.length > 0) {
+        var aItem = aCopy.shift();
+        var matchingIndex = findItemIndex(bCopy, aItem, opts.equals);
+        var matchingItem = pop(bCopy, matchingIndex);
 
-        changesList.push({
-            type: isInA ? 'remove' : 'add',
-            item: item
-        });
-    });
-
-    var inBoth = and(a, b, opts.equals);
-    _.each(inBoth, function(item) {
-        var aItem = _.find(a, function(i) {
-            return opts.equals(i, item);
-        });
-        var bItem = _.find(b, function(i) {
-            return opts.equals(i, item);
-        });
-
-        if (!opts.deepEquals(aItem, bItem)) {
-            changesList.push({
-                type: 'change',
-                // Return the new changed item
-                item: bItem
+        if (_.isUndefined(matchingItem)) {
+            mutationsList.push({
+                type: 'remove',
+                item: aItem
             });
+        } else {
+            var hasChanged = !opts.deepEquals(aItem, matchingItem);
+            if (hasChanged) {
+                mutationsList.push({
+                    type: 'change',
+                    old: aItem,
+                    item: matchingItem
+                });
+            }
         }
+    }
+
+    _.each(bCopy, function(bItem) {
+        mutationsList.push({
+            type: 'add',
+            item: bItem
+        });
     });
 
-    return _.sortBy(changesList, 'type');
+    return _.sortBy(mutationsList, 'type');
+}
+
+function pop(arr, index) {
+    if (index > -1) {
+        return arr.splice(index, 1)[0];
+    }
+}
+
+function findItemIndex(arr, item, equals) {
+    return _.findIndex(arr, function(arrItem) {
+        return equals(arrItem, item);
+    });
 }
 
 function defaultEquals(a, b) {
@@ -60,4 +70,4 @@ function defaultDeepEquals(a1, a2) {
     return _.isEqual(a1, a2);
 }
 
-module.exports = changes;
+module.exports = mutations;

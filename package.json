@@ -1,26 +1,25 @@
 {
-  "name": "arr-changes",
+  "name": "arr-mutations",
   "version": "0.1.0",
   "description": "Calculate all mutation operations between two arrays. Supports a generic equals predicate function.",
   "main": "src/index.js",
   "keywords": [
     "array",
-    "changes",
-    "predicate"
+    "mutations",
+    "predicate",
+    "changes"
   ],
   "repository": {
     "type": "git",
-    "url": "git@github.com:kimmobrunfeldt/arr-changes.git"
+    "url": "git@github.com:kimmobrunfeldt/arr-mutations.git"
   },
   "author": "Kimmo Brunfeldt",
   "license": "MIT",
   "dependencies": {
-    "arr-and": "^1.0.0",
-    "arr-xor": "^1.0.1",
     "lodash.find": "^3.2.1",
-    "lodash.findindex": "^3.2.1",
     "lodash.foreach": "^3.0.3",
     "lodash.isequal": "^3.0.4",
+    "lodash.isundefined": "^3.0.1",
     "lodash.merge": "^3.3.2",
     "lodash.sortby": "^3.1.5"
   },
