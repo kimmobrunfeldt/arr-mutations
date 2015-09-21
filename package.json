@@ -16,7 +16,7 @@
   "author": "Kimmo Brunfeldt",
   "license": "MIT",
   "dependencies": {
-    "lodash.find": "^3.2.1",
+    "lodash.findindex": "^3.2.1",
     "lodash.foreach": "^3.0.3",
     "lodash.isequal": "^3.0.4",
     "lodash.isundefined": "^3.0.1",
