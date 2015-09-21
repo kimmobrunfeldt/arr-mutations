@@ -1,8 +1,8 @@
 var _ = {
     merge: require('lodash.merge'),
     each: require('lodash.foreach'),
-    findIndex: require('lodash.findIndex'),
-    isEqual: require('lodash.isEqual'),
+    findIndex: require('lodash.findindex'),
+    isEqual: require('lodash.isequal'),
     sortBy: require('lodash.sortby'),
     isUndefined: require('lodash.isundefined')
 };
