@@ -1,6 +1,6 @@
 {
   "name": "arr-mutations",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Calculate all mutation operations between two arrays. Supports a generic equals predicate function.",
   "main": "src/index.js",
   "keywords": [
