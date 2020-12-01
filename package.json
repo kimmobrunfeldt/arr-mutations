@@ -20,7 +20,7 @@
     "lodash.foreach": "^3.0.3",
     "lodash.isequal": "^3.0.4",
     "lodash.isundefined": "^3.0.1",
-    "lodash.merge": "^3.3.2",
+    "lodash.mergewith": "^4.6.2",
     "lodash.sortby": "^3.1.5"
   },
   "devDependencies": {

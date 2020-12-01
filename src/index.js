@@ -1,5 +1,5 @@
 var _ = {
-    merge: require('lodash.merge'),
+    merge: require('lodash.mergewith'),
     each: require('lodash.foreach'),
     findIndex: require('lodash.findindex'),
     isEqual: require('lodash.isequal'),
